@@ -1,5 +1,16 @@
 import menu from '../menu.json';
-import markapTpl from '../templates/markap.hbs';
-// console.log('hello');
+import markupTpl from '../templates/markap.hbs';
 // console.log(menu);
-console.log(markapTpl(menu[6]));
+// console.log(markupTpl(menu[2]));
+
+const menuContainerRef = document.querySelector(".js-menu");
+// console.log(menuContainerRef);
+
+const MenuCardsMarkup = createMenuCardsMarkup(menu);
+// console.log(MenuCardsMarkup);
+
+menuContainerRef.insertAdjacentHTML('beforeend', MenuCardsMarkup);
+
+function createMenuCardsMarkup(menu) {
+    return menu.map(markupTpl).join('');
+}
