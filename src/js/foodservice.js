@@ -46,25 +46,25 @@ function onThemeSwitchToggleKlick(evt) {
 
     let classListValue = bodyRef.classList.value;
     localStorage.setItem('class-name', classListValue);
-    console.log(classListValue);
+    // console.log(classListValue);
 
-    let checkedValue = themeSwitchToggleRef.checked;
-    console.log(checkedValue);
-    localStorage.setItem('checked-Value', checkedValue);
+    // let checkedValue = themeSwitchToggleRef.checked;
+    // console.log(checkedValue);
+    // localStorage.setItem('checked-Value', checkedValue);
 }
 
 function localStorageValue(evt) {
 
     const savedClassListValue  = localStorage.getItem('class-name');
-    console.log(savedClassListValue);
+    // console.log(savedClassListValue);
  
     bodyRef.classList.value = savedClassListValue;
 
     
-    const savedCheckedValue = localStorage.getItem('checked-Value');
-    console.log(savedCheckedValue);
+    // const savedCheckedValue = localStorage.getItem('checked-Value');
+    // console.log(savedCheckedValue);
 
-    themeSwitchToggleRef.checked !== savedClassListValue;
+    // themeSwitchToggleRef.checked !== savedClassListValue;
 
 }
 
