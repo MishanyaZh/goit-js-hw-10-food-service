@@ -1,79 +1,118 @@
 import menu from '../menu.json';
 import markupTpl from '../templates/markap.hbs';
-// console.log(menu);
-// console.log(markupTpl);
 
 const menuContainerRef = document.querySelector(".js-menu");
-// console.log(menuContainerRef);
 
 // create Markup
 const MenuCardsMarkup = markupTpl(menu);
-// console.log(MenuCardsMarkup);
+
 
 //add markup in container
 menuContainerRef.innerHTML = MenuCardsMarkup;
-
-// function createMenuCardsMarkup(menu) {
-//     return menu.map(markupTpl).join('');
-// }
-
-const bodyRef = document.querySelector('body');
-
-const themeSwitchToggleRef = document.querySelector("#theme-switch-toggle");
-// console.dir(themeSwitchToggleRef);
-
-themeSwitchToggleRef.addEventListener('change', onThemeSwitchToggleKlick);
 
 const Theme = {
     LIGHT: 'light-theme',
     DARK: 'dark-theme',
 };
 
-bodyRef.classList.add(Theme.LIGHT);
-// let isLightTheme = bodyRef.classList.contains(Theme.LIGHT);
+// 1. ссилки на елементи
+const bodyRef = document.querySelector('body');
+const checkboxRef = document.querySelector("#theme-switch-toggle");
 
-// localStorageValue()
+// 2. слушатель на checkbox
+checkboxRef.addEventListener('change', checkboxValue);
 
-function onThemeSwitchToggleKlick(evt) {
+// 3. проверка checkbox значения
+function checkboxValue (evt) {
+    const checkboxValueCurrent = evt.currentTarget.checked;
     
-    // if (isLightTheme) {
-    //     bodyRef.classList.replace(Theme.LIGHT, Theme.DARK);
-    // } else bodyRef.classList.replace(Theme.DARK, Theme.LIGHT);
-
-    // isLightTheme = !isLightTheme;   
-
-    const checkedValue = themeSwitchToggleRef.checked;
-    // console.log(checkedValue);
-
-    if (checkedValue) {
-        bodyRef.classList.replace(Theme.LIGHT, Theme.DARK);
-    } else bodyRef.classList.replace(Theme.DARK, Theme.LIGHT);
-
-    // checkedValue = !checkedValue;   
-    
-    // console.log(bodyRef.classList.value);
-
-
-
-    // const checkedValue = themeSwitchToggleRef.checked;
-    // console.log(checkedValue);
-    localStorage.setItem('checked-Value', checkedValue);
-    const savedCheckedValue = localStorage.getItem('checked-Value');
-    console.log(savedCheckedValue);
-
-    
-
+    if (checkboxValueCurrent === true) {
+        checkedTrue()
+        console.log("+");
+    } else {
+        checkedFalse()
+        console.log('-');
+    }
 }
 
-function localStorageValue(evt) {
+// 4. якшо true то DARK
+function checkedTrue() {
+    bodyRef.classList.add(Theme.DARK);
+    bodyRef.classList.remove(Theme.LIGHT);
+    localStorage.setItem('theme', Theme.DARK);
+    checkboxRef.checked = true;
+}
 
-    // const savedCheckedValue = localStorage.getItem('checked-Value');
-    // console.log(savedCheckedValue);
-    // if (savedCheckedValue) {
-    //         bodyRef.classList.replace(Theme.LIGHT, Theme.DARK);
-    // } else bodyRef.classList.replace(Theme.DARK, Theme.LIGHT);
+// 5. якщо false LIGHT
+function checkedFalse() {
+    bodyRef.classList.add(Theme.LIGHT);
+    bodyRef.classList.remove(Theme.DARK);
+    localStorage.setItem('theme', Theme.LIGHT);
+    checkboxRef.checked = false;
+}
 
+// 6. якщо ще немає вибору, або вибір вже localStorage. початкові дані. або збережені !!!
+
+function defoltOrMyTheme() {
+
+    const myTheme = localStorage.getItem('theme');
+
+    if (myTheme === Theme.LIGHT || myTheme === null) {
+        checkedFalse();
+        return;
     }
+
+    if (myTheme === Theme.DARK) {
+        checkedTrue();
+        return;
+    }
+}
+
+// відразу запуск на перевірку localStorage. або якщо 1й вхід
+defoltOrMyTheme();
+
+
+
+// чорновик------------------------------------------------------------
+
+// const bodyRef = document.querySelector('body');
+// const themeSwitchToggleRef = document.querySelector("#theme-switch-toggle");
+
+// themeSwitchToggleRef.addEventListener('change', onThemeSwitchToggleKlick);
+
+
+
+// bodyRef.classList.add(Theme.LIGHT);
+// // let isLightTheme = bodyRef.classList.contains(Theme.LIGHT);
+
+// function onThemeSwitchToggleKlick(evt) {
+    
+
+//     const checkedValue = themeSwitchToggleRef.checked;
+//     // console.log(checkedValue);
+
+//     if (checkedValue === true) {
+//         bodyRef.classList.replace(Theme.LIGHT, Theme.DARK);
+//         localStorage.setItem('checked-Value', checkedValue);
+//     } else {
+//         bodyRef.classList.replace(Theme.DARK, Theme.LIGHT);
+//         localStorage.setItem('checked-Value', checkedValue);
+//     }
+
+// }
+
+// localStorageValue()
+// function localStorageValue(evt) {
+
+//     const savedCheckedValue = localStorage.getItem('checked-Value');
+//     // console.log(savedCheckedValue);
+//     if (savedCheckedValue === true) {
+//             bodyRef.classList.replace(Theme.LIGHT, Theme.DARK);
+//     } else {bodyRef.classList.replace(Theme.DARK, Theme.LIGHT);}
+
+// }
+
+
 
 
 
