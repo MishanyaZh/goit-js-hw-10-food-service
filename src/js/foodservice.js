@@ -30,43 +30,51 @@ const Theme = {
 };
 
 bodyRef.classList.add(Theme.LIGHT);
-let isLightTheme = bodyRef.classList.contains(Theme.LIGHT);
+// let isLightTheme = bodyRef.classList.contains(Theme.LIGHT);
 
-localStorageValue()
+// localStorageValue()
 
 function onThemeSwitchToggleKlick(evt) {
     
-    if (isLightTheme) {
+    // if (isLightTheme) {
+    //     bodyRef.classList.replace(Theme.LIGHT, Theme.DARK);
+    // } else bodyRef.classList.replace(Theme.DARK, Theme.LIGHT);
+
+    // isLightTheme = !isLightTheme;   
+
+    const checkedValue = themeSwitchToggleRef.checked;
+    // console.log(checkedValue);
+
+    if (checkedValue) {
         bodyRef.classList.replace(Theme.LIGHT, Theme.DARK);
     } else bodyRef.classList.replace(Theme.DARK, Theme.LIGHT);
 
-    isLightTheme = !isLightTheme;   
+    // checkedValue = !checkedValue;   
     
     // console.log(bodyRef.classList.value);
 
-    let classListValue = bodyRef.classList.value;
-    localStorage.setItem('class-name', classListValue);
-    // console.log(classListValue);
 
-    // let checkedValue = themeSwitchToggleRef.checked;
+
+    // const checkedValue = themeSwitchToggleRef.checked;
     // console.log(checkedValue);
-    // localStorage.setItem('checked-Value', checkedValue);
+    localStorage.setItem('checked-Value', checkedValue);
+    const savedCheckedValue = localStorage.getItem('checked-Value');
+    console.log(savedCheckedValue);
+
+    
+
 }
 
 function localStorageValue(evt) {
 
-    const savedClassListValue  = localStorage.getItem('class-name');
-    // console.log(savedClassListValue);
- 
-    bodyRef.classList.value = savedClassListValue;
-
-    
     // const savedCheckedValue = localStorage.getItem('checked-Value');
     // console.log(savedCheckedValue);
+    // if (savedCheckedValue) {
+    //         bodyRef.classList.replace(Theme.LIGHT, Theme.DARK);
+    // } else bodyRef.classList.replace(Theme.DARK, Theme.LIGHT);
 
-    // themeSwitchToggleRef.checked !== savedClassListValue;
+    }
 
-}
 
 
    
